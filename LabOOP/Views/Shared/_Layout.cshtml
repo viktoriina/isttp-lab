@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LabOOP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap_slate.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LabOOP.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LabOOP</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    @if(User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">Main Menu</a>
+                            </li>
+                          @if (User.IsInRole("admin") || User.IsInRole("superAdmin"))
+                           {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Delivers" asp-action="Index">Delivers</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">Users List</a>
+                            </li>
+                          }
+                            @if (User.IsInRole("superAdmin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Index">Controls Roles</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="ms-auto me-5">
+                            <ul class="navbar-nav justify-content-end">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-truncate" href="#" id="navbarDropdown" role="button"
+                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                        @User.Identity.Name
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-controller="Accounts" asp-action="ChangePassword">Change Password</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Accounts" asp-action="Logout">Logout</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Accounts" asp-action="Details">Details</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Accounts" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Accounts" asp-action="Register">Register</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main" class="container mt-5 pt-3">
+        @RenderBody()
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

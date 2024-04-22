@@ -1,0 +1,13 @@
+﻿@model LabOOP.ViewModels.CreateRoleViewModel
+
+<form asp-action="Create" class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal Center">Log in</h1>
+    <div class="Center">
+        <input style="width:50%" asp-for="Role" class="form-control" placeholder="Role name" autofocus>
+    </div>
+    <span asp-validation-for="Role" class="text-danger Center"></span>
+
+    <div class="BtnCenter">
+        <button asp-controller="Roles" asp-action="Create" class="btn btn-lg btn-primary btn-block" type="submit">Add Role</button>
+    </div>
+</form>

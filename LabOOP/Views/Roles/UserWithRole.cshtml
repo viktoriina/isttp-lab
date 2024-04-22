@@ -1,0 +1,16 @@
+﻿@model IEnumerable<LabOOP.Models.User>
+
+<h2>List of Users</h2>
+<table class="table">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>@user.UserName</td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Roles of User</a>
+                <a class="btn btn-sm btn-primary" asp-action="Index" asp-route-userid="@user.Id">Back to list of roles</a>
+            </td>
+        </tr>
+    }
+</table>

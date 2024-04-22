@@ -1,0 +1,46 @@
+﻿@using LabOOP.ViewModels
+@model List<UserViewModel>
+
+<div class="container">
+    <h1 class="text-center mb-5">User Profiles</h1>
+
+    <div class="row">
+        @foreach (var user in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User name: @user.Username</h5>
+                        <p class="card-text">
+                            Email: @user.Email <br />
+                            Name: @user.Name <br />
+                            Last Name: @user.LastName
+                        </p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("Edit", "Users", new { id = user.Id })">
+                                        <i class="fas fa-user-edit mr-2"></i>Edit Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form method="post" action="@Url.Action("Delete", "Users", new { id = user.Id })" onsubmit="return confirm('Are you sure you want to delete your profile? This action cannot be undone.');">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fas fa-user-minus mr-2"></i>Delete Profile
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
